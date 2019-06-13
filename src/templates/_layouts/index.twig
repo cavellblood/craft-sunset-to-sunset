@@ -3,20 +3,31 @@
 {% do view.registerAssetBundle("cavellblood\\sunsettosunset\\assetbundles\\sunsettosunset\\SunsetToSunsetAsset") %}
 
 {% if title is not defined %}
-    {% set title = 'Sunset to Sunset' %}
+	{% set title = craft.sunsetToSunset.getPluginName %}
 {% endif %}
 
 {# The URL to this plugin's base CP section #}
-{% set pluginCpUrl = url('sunset-to-sunset') %}
+{% set pluginCpUrl = craft.sunsetToSunset.getSettingsUrl() %}
 
 {% set sunsetToSunsetSections = {
-    message: { label: "Message"|t, url: url(craft.sunsetToSunset.getSettingsUrl() ~ '/message') },
-	location: { label: "Location"|t, url: url(craft.sunsetToSunset.getSettingsUrl() ~ '/location') },
-	template: { label: "Template"|t, url: url(craft.sunsetToSunset.getSettingsUrl() ~ '/template') },
-	advanced: { label: "Advanced"|t, url: url(craft.sunsetToSunset.getSettingsUrl() ~ '/advanced') },
+    message: { label: "Message"|t, url: url(pluginCpUrl ~ '/message') },
+	location: { label: "Location"|t, url: url(pluginCpUrl ~ '/location') },
+	template: { label: "Template"|t, url: url(pluginCpUrl ~ '/template') },
+	advanced: { label: "Advanced"|t, url: url(pluginCpUrl ~ '/advanced') },
 } %}
 
 {% set tabs = sunsetToSunsetSections %}
+
+{% set crumbs = [
+	{
+		label: craft.sunsetToSunset.getPluginName(),
+		url: url(pluginCpUrl)
+	},
+	{
+		label: sunsetToSunsetSections[(selectedTab ?? selectedSubnavItem)].label,
+		url: sunsetToSunsetSections[(selectedTab ?? selectedSubnavItem)].url
+	},
+] %}
 
 {% set content %}
 	{% block blockContent %}
