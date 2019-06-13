@@ -4,12 +4,14 @@
 
 {% set selectedTab = 'message' %}
 
+{% set fullPageForm = true %}
+
 {% block blockContent %}
 	{{ parent() }}
 
-    <input type="hidden" name="action" value="plugins/savePluginSettings">
-    <input type="hidden" name="pluginClass" value="SunsetToSunset">
-    <input type="hidden" name="redirect" value="sunsettosunset">
+    <input type="hidden" name="action" value="plugins/save-plugin-settings">
+    <input type="hidden" name="plugin-handle" value="sunset-to-sunset">
+    <input type="hidden" name="redirect" value="sunset-to-sunset/message">
 
     {{ forms.textField({
 	    first:        true,
