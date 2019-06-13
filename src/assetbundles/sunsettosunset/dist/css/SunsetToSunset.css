@@ -9,3 +9,66 @@
  * @package   SunsetToSunset
  * @since     2.0.0
  */
+
+ div.half-width-field {
+	display: inline-block;
+	width: 45%;
+}
+
+div.half-width-field-left {
+	padding-right: 5%;
+}
+
+/* ==========================================================================
+* Banner
+* ========================================================================== */
+
+.sts__container {
+	background-color: #464646;
+	text-align: center;
+	color: white;
+	padding: 0.5rem 0;
+}
+
+.sts__container--fixed {
+	width: 100%;
+	z-index: 100;
+	top: 0;
+}
+
+.sts__message {
+	margin: 0.75rem 2rem;
+}
+
+.sts__message p {
+	margin: 0 auto;
+}
+
+.sts__message strong {
+	font-weight: 600;
+}
+
+
+/* ==========================================================================
+* Plugin Footer
+* ========================================================================== */
+
+.plugin-footer {
+	margin: 24px 0 0 0;
+	width: 100%;
+}
+
+.plugin-footer .footer-left {
+	float: left;
+}
+
+.plugin-footer .footer-right {
+	float: right;
+}
+
+.plugin-footer .plugin-credit {
+	font-size: 11px;
+	color: #8f98a3;
+	text-align: right;
+	margin-top: 10px;
+}
