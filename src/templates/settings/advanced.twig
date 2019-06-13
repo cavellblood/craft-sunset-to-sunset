@@ -1,0 +1,18 @@
+{% extends "sunset-to-sunset/_layouts" %}
+{% import "_includes/forms" as forms %}
+{% from "sunset-to-sunset/_macros" import configWarning %}
+
+{% set selectedTab = 'advanced' %}
+
+{% set fullPageForm = true %}
+
+{% block blockContent %}
+	{{ parent() }}
+
+    <input type="hidden" name="action" value="plugins/save-plugin-settings">
+    <input type="hidden" name="pluginHandle" value="sunset-to-sunset">
+    <input type="hidden" name="redirect" value="sunset-to-sunset/template">
+
+    
+
+{% endblock %}
