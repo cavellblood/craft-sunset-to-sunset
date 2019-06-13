@@ -10,6 +10,7 @@
 
 namespace cavellblood\sunsettosunset;
 
+use cavellblood\sunsettosunset\services\SunsetToSunsetService as SunsetToSunsetServiceService;
 use cavellblood\sunsettosunset\variables\SunsetToSunsetVariable;
 use cavellblood\sunsettosunset\models\Settings;
 
@@ -37,6 +38,7 @@ use yii\base\Event;
  * @package   SunsetToSunset
  * @since     2.0.0
  *
+ * @property  SunsetToSunsetServiceService $sunsetToSunsetService
  * @property  Settings $settings
  * @method    Settings getSettings()
  */
