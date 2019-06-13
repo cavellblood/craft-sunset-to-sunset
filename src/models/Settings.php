@@ -40,9 +40,55 @@ class Settings extends Model
      * @var string
      */
     public $someAttribute = 'Some Default';
+    public $pluginName = 'Sunset to Sunset';
+    public $latitude;
+    public $longitude;
+    public $timezone;
+    public $guard;
+    public $message;
+    public $bannerMessage;
+    public $showMessageTime;
+    public $templateRedirect;
+    public $specificRedirectUrls;
+    public $showBannerOnSpecificUrls;
+    public $bannerCssPosition;
+    public $bannerCssBackgroundColor;
+    public $simulateTime;
 
     // Public Methods
     // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+
+        if ($this->latitude === null) {
+            $this->latitude = \Craft::t('sunset-to-sunset', '41.8333925');
+        }
+
+        if ($this->longitude === null) {
+            $this->longitude = \Craft::t('sunset-to-sunset', '-88.0121473');
+        }
+
+        if ($this->timezone === null) {
+            $this->timezone = \Craft::t('sunset-to-sunset', 'America/Chicago');
+        }
+
+        if ($this->guard === null) {
+            $this->guard = \Craft::t('sunset-to-sunset', 30);
+        }
+
+        if ($this->showMessageTime === null) {
+            $this->showMessageTime = \Craft::t('sunset-to-sunset', 180);
+        }
+
+        if ($this->bannerCssPosition === null) {
+            $this->bannerCssPosition = \Craft::t('sunset-to-sunset', 'relative');
+        }
+    }
 
     /**
      * Returns the validation rules for attributes.
@@ -56,9 +102,37 @@ class Settings extends Model
      */
     public function rules()
     {
-        return [
-            ['someAttribute', 'string'],
-            ['someAttribute', 'default', 'value' => 'Some Default'],
+        return [            
+            [
+                [
+                    'latitude',
+                    'longitude',
+                    'timezone',
+                    'bannerMessage',
+                    'templateRedirect',
+                    'bannerCssPosition',
+                    'bannerCssBackgroundColor',
+                    'simulateTime',
+                ],
+                'string'
+            ],
+            [
+                [
+                    'gaurd',
+                    'showMessageTime'
+                ],
+                'integer'
+            ],
+            ['message', 'mixed'],
+            ['specificRedirectUrls', 'mixed'],
+            ['showBannerOnSpecificUrls', 'boolean'],
+            [
+                 [
+                     'latitude',
+                     'longitude'
+                ],
+                'required'
+            ],
         ];
     }
 }

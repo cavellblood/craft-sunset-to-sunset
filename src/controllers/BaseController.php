@@ -16,7 +16,7 @@ use Craft;
 use craft\web\Controller;
 
 /**
- * Default Controller
+ * Base Controller
  *
  * Generally speaking, controllers are the middlemen between the front end of
  * the CP/website and your plugin’s services. They contain action methods which
@@ -35,7 +35,7 @@ use craft\web\Controller;
  * @package   SunsetToSunset
  * @since     2.0.0
  */
-class DefaultController extends Controller
+class BaseController extends Controller
 {
 
     // Protected Properties
@@ -53,27 +53,56 @@ class DefaultController extends Controller
 
     /**
      * Handle a request going to our plugin's index action URL,
-     * e.g.: actions/sunset-to-sunset/default
+     * e.g.: actions/sunset-to-sunset/base
      *
      * @return mixed
      */
     public function actionIndex()
     {
-        $result = 'Welcome to the DefaultController actionIndex() method';
+        $result = 'Welcome to the BaseController actionIndex() method';
 
         return $result;
     }
 
     /**
      * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/sunset-to-sunset/default/do-something
+     * e.g.: actions/sunset-to-sunset/base/do-something
      *
      * @return mixed
      */
-    public function actionDoSomething()
+    public function actionSettings()
     {
-        $result = 'Welcome to the DefaultController actionDoSomething() method';
+        $settings = SunsetToSunset::$plugin->getSettings();
 
-        return $result;
+        return $this->renderTemplate('sunset-to-sunset/settings/message', [
+            'settings' => $settings,
+        ]);
+    }
+
+    public function actionSettingsLocation()
+    {
+        $settings = SunsetToSunset::$plugin->getSettings();
+
+        return $this->renderTemplate('sunset-to-sunset/settings/location', [
+            'settings' => $settings,
+        ]);
+    }
+
+    public function actionSettingsTemplate()
+    {
+        $settings = SunsetToSunset::$plugin->getSettings();
+
+        return $this->renderTemplate('sunset-to-sunset/settings/template', [
+            'settings' => $settings,
+        ]);
+    }
+
+    public function actionSettingsAdvanced()
+    {
+        $settings = SunsetToSunset::$plugin->getSettings();
+
+        return $this->renderTemplate('sunset-to-sunset/settings/advanced', [
+            'settings' => $settings,
+        ]);
     }
 }

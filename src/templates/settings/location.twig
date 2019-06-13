@@ -1,0 +1,71 @@
+{% extends "sunset-to-sunset/_layouts" %}
+{% import "_includes/forms" as forms %}
+{% from "sunset-to-sunset/_macros" import configWarning %}
+
+{% set selectedTab = 'location' %}
+
+{% block blockContent %}
+	{{ parent() }}
+
+    <input type="hidden" name="action" value="plugins/savePluginSettings">
+    <input type="hidden" name="pluginClass" value="SunsetToSunset">
+    <input type="hidden" name="redirect" value="sunsettosunset/location">
+
+
+    {{ forms.textField({
+        label:        'Latitude'|t('sunset-to-sunset'),
+        required:     true,
+        instructions: 'Enter the latitude of the target sunset location.'|t('sunset-to-sunset'),
+        id:           'latitude',
+        name:         'latitude',
+        type:         'text',
+        size:         '12',
+        class:        'code',
+        placeholder:  '0.0000000',
+        value:        settings.latitude,
+        disabled:     'latitude' in overrides,
+        warning:      'latitude' in overrides ? configWarning('latitude'),
+        errors:       settings.getErrors('latitude')
+    }) }}
+
+    {{ forms.textField({
+        label:        'Latitude'|t('sunset-to-sunset'),
+        required:     true,
+        instructions: 'Enter the longitude of the target sunset location.'|t('sunset-to-sunset'),
+        id:           'settings-longitude',
+        name:         'settings[longitude]',
+        type:         'text',
+        size:         '12',
+        class:        'code',
+        placeholder:  '0.0000000',
+        value:        settings['longitude'],
+        disabled:     'longitude' in overrides,
+        warning:      'longitude' in overrides ? configWarning('longitude'),
+        errors:       settings.getErrors('longitude')
+    }) }}
+
+    {{ forms.selectField({
+        label:        'Time Zone'|t('sunset-to-sunset'),
+        instructions: 'Select the time zone of the target sunset location.'|t('sunset-to-sunset'),
+        id:           'settings-timezone',
+        name:         'settings[timezone]',
+        value:        settings['timezone'],
+        options: {
+            'America' : {
+                optgroup: 'America',
+            },
+            'Pacific/Honolulu' : 'Pacific/Honolulu',
+            'America/Anchorage' : 'America/Anchorage',
+            'America/Los_Angeles' : 'America/Los_Angeles',
+            'America/Phoenix' : 'America/Phoenix',
+            'America/Chicago' : 'America/Chicago',
+            'America/New_York' : 'America/New York',
+            'America/Denver' : 'America/Denver',
+        },
+        class:        'timezone' in overrides ? 'disabled',
+        disabled:     'timezone' in overrides,
+        warning:      'timezone' in overrides ? configWarning('timezone'),
+        errors:       settings.getErrors('timezone')
+    }) }}
+
+{% endblock %}

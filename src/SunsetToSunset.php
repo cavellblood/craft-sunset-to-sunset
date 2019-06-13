@@ -84,64 +84,27 @@ class SunsetToSunset extends Plugin
         parent::init();
         self::$plugin = $this;
 
-        // Register our site routes
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_SITE_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                $event->rules['siteActionTrigger1'] = 'sunset-to-sunset/default';
-            }
-        );
+        $this->_registerCpRoutes();
+        $this->_registerVariables();
 
-        // Register our CP routes
-        Event::on(
-            UrlManager::class,
-            UrlManager::EVENT_REGISTER_CP_URL_RULES,
-            function (RegisterUrlRulesEvent $event) {
-                $event->rules['cpActionTrigger1'] = 'sunset-to-sunset/default/do-something';
-            }
-        );
-
-        // Register our variables
-        Event::on(
-            CraftVariable::class,
-            CraftVariable::EVENT_INIT,
-            function (Event $event) {
-                /** @var CraftVariable $variable */
-                $variable = $event->sender;
-                $variable->set('sunsetToSunset', SunsetToSunsetVariable::class);
-            }
-        );
-
-        // Do something after we're installed
-        Event::on(
-            Plugins::class,
-            Plugins::EVENT_AFTER_INSTALL_PLUGIN,
-            function (PluginEvent $event) {
-                if ($event->plugin === $this) {
-                    // We were just installed
-                }
-            }
-        );
-
-/**
- * Logging in Craft involves using one of the following methods:
- *
- * Craft::trace(): record a message to trace how a piece of code runs. This is mainly for development use.
- * Craft::info(): record a message that conveys some useful information.
- * Craft::warning(): record a warning message that indicates something unexpected has happened.
- * Craft::error(): record a fatal error that should be investigated as soon as possible.
- *
- * Unless `devMode` is on, only Craft::warning() & Craft::error() will log to `craft/storage/logs/web.log`
- *
- * It's recommended that you pass in the magic constant `__METHOD__` as the second parameter, which sets
- * the category to the method (prefixed with the fully qualified class name) where the constant appears.
- *
- * To enable the Yii debug toolbar, go to your user account in the AdminCP and check the
- * [] Show the debug toolbar on the front end & [] Show the debug toolbar on the Control Panel
- *
- * http://www.yiiframework.com/doc-2.0/guide-runtime-logging.html
- */
+        /**
+         * Logging in Craft involves using one of the following methods:
+         *
+         * Craft::trace(): record a message to trace how a piece of code runs. This is mainly for development use.
+         * Craft::info(): record a message that conveys some useful information.
+         * Craft::warning(): record a warning message that indicates something unexpected has happened.
+         * Craft::error(): record a fatal error that should be investigated as soon as possible.
+         *
+         * Unless `devMode` is on, only Craft::warning() & Craft::error() will log to `craft/storage/logs/web.log`
+         *
+         * It's recommended that you pass in the magic constant `__METHOD__` as the second parameter, which sets
+         * the category to the method (prefixed with the fully qualified class name) where the constant appears.
+         *
+         * To enable the Yii debug toolbar, go to your user account in the AdminCP and check the
+         * [] Show the debug toolbar on the front end & [] Show the debug toolbar on the Control Panel
+         *
+         * http://www.yiiframework.com/doc-2.0/guide-runtime-logging.html
+         */
         Craft::info(
             Craft::t(
                 'sunset-to-sunset',
@@ -150,6 +113,24 @@ class SunsetToSunset extends Plugin
             ),
             __METHOD__
         );
+    }
+
+    public function getPluginName()
+    {
+        return Craft::t('feed-me', $this->getSettings()->pluginName);
+    }
+
+    public function getSettingsUrl()
+    {
+        return 'sunset-to-sunset';
+    }
+
+    public function getCpNavItem()
+    {
+        $navItem = parent::getCpNavItem();
+        $navItem['label'] = $this->getPluginName();
+
+        return $navItem;
     }
 
     // Protected Methods
@@ -173,11 +154,53 @@ class SunsetToSunset extends Plugin
      */
     protected function settingsHtml(): string
     {
+        // Get and pre-validate the settings
+        $settings = $this->getSettings();
+        $settings->validate();
+
+        // Get the settings that are being defined by the config file
+        $overrides = Craft::$app->getConfig()->getConfigFromFile(strtolower($this->handle));
+
         return Craft::$app->view->renderTemplate(
             'sunset-to-sunset/settings',
             [
-                'settings' => $this->getSettings()
+                'settings' => $settings,
+                'overrides' => array_keys($overrides),
             ]
+        );
+    }
+
+    // Private Methods
+    // =========================================================================
+
+    private function _registerCpRoutes()
+    {
+        Event::on(
+            UrlManager::class,
+            UrlManager::EVENT_REGISTER_CP_URL_RULES,
+            function (RegisterUrlRulesEvent $event) {
+                $event->rules = array_merge($event->rules, [
+
+                    'sunset-to-sunset' => 'sunset-to-sunset/base/settings',
+                    'sunset-to-sunset/message' => 'sunset-to-sunset/base/settings',
+                    'sunset-to-sunset/location' => 'sunset-to-sunset/base/settings-location',
+                    'sunset-to-sunset/template' => 'sunset-to-sunset/base/settings-template',
+                    'sunset-to-sunset/advanced' => 'sunset-to-sunset/base/settings-advanced',
+                ]);
+            }
+        );
+    }
+
+    private function _registerVariables()
+    {
+        Event::on(
+            CraftVariable::class,
+            CraftVariable::EVENT_INIT,
+            function (Event $event) {
+                /** @var CraftVariable $variable */
+                $variable = $event->sender;
+                $variable->set('sunsetToSunset', SunsetToSunsetVariable::class);
+            }
         );
     }
 }

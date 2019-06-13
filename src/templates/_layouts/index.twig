@@ -1,4 +1,4 @@
-{% extends '_layouts/cp' %}
+{% extends parentLayout | default('_layouts/cp') %}
 
 {% do view.registerAssetBundle("cavellblood\\sunsettosunset\\assetbundles\\sunsettosunset\\SunsetToSunsetAsset") %}
 
@@ -9,9 +9,34 @@
 {# The URL to this plugin's base CP section #}
 {% set pluginCpUrl = url('sunset-to-sunset') %}
 
-{% set tabs = {
-    message: { label: "Message"|t, url: url(craft.sunsettosunset.getSettingsUrl() ~ '/message') },
-	location: { label: "Location"|t, url: url(craft.sunsettosunset.getSettingsUrl() ~ '/location') },
-	template: { label: "Template"|t, url: url(craft.sunsettosunset.getSettingsUrl() ~ '/template') },
-	advanced: { label: "Advanced"|t, url: url(craft.sunsettosunset.getSettingsUrl() ~ '/advanced') },
+{% set sunsetToSunsetSections = {
+    message: { label: "Message"|t, url: url(craft.sunsetToSunset.getSettingsUrl() ~ '/message') },
+	location: { label: "Location"|t, url: url(craft.sunsetToSunset.getSettingsUrl() ~ '/location') },
+	template: { label: "Template"|t, url: url(craft.sunsetToSunset.getSettingsUrl() ~ '/template') },
+	advanced: { label: "Advanced"|t, url: url(craft.sunsetToSunset.getSettingsUrl() ~ '/advanced') },
 } %}
+
+{% set tabs = sunsetToSunsetSections %}
+
+{% set content %}
+	{% block blockContent %}
+		<h2>{{ sunsetToSunsetSections[(selectedTab)].label }}</h2>
+
+	{% endblock %}
+
+    <hr>
+
+    <div class="plugin-footer">
+        <div class="footer-left">
+			{% block footerButton %}
+
+			{% endblock %}
+        </div>
+
+        <div class="footer-right">
+            <div class="plugin-credit">
+                <p>{{ craft.sunsetToSunset.getPluginName }} {{ craft.sunsetToSunset.getPluginVersion }} &bull; <a href="{{ craft.sunsetToSunset.getPluginUrl }}" target="_blank">GitHub</a></p>
+            </div>
+        </div>
+    </div>
+{% endset %}
