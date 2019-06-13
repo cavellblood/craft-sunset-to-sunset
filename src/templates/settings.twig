@@ -1,0 +1,26 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Sunset to Sunset plugin for Craft CMS 3.x
+ *
+ * Sunset to Sunset Settings.twig
+ *
+ * @author    Cavell L. Blood
+ * @copyright Copyright (c) 2019 Cavell L. Blood
+ * @link      https://cavellblood.com
+ * @package   SunsetToSunset
+ * @since     2.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("cavellblood\\sunsettosunset\\assetbundles\\sunsettosunset\\SunsetToSunsetAsset") %}
+
+{{ forms.textField({
+    label: 'Some Field',
+    instructions: 'Enter some setting here.',
+    id: 'someAttribute',
+    name: 'someAttribute',
+    value: settings['someAttribute']})
+}}

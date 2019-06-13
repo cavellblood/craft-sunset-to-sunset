@@ -1,0 +1,17 @@
+{% extends '_layouts/cp' %}
+
+{% do view.registerAssetBundle("cavellblood\\sunsettosunset\\assetbundles\\sunsettosunset\\SunsetToSunsetAsset") %}
+
+{% if title is not defined %}
+    {% set title = 'Sunset to Sunset' %}
+{% endif %}
+
+{# The URL to this plugin's base CP section #}
+{% set pluginCpUrl = url('sunset-to-sunset') %}
+
+{% set tabs = {
+    message: { label: "Message"|t, url: url(craft.sunsettosunset.getSettingsUrl() ~ '/message') },
+	location: { label: "Location"|t, url: url(craft.sunsettosunset.getSettingsUrl() ~ '/location') },
+	template: { label: "Template"|t, url: url(craft.sunsettosunset.getSettingsUrl() ~ '/template') },
+	advanced: { label: "Advanced"|t, url: url(craft.sunsettosunset.getSettingsUrl() ~ '/advanced') },
+} %}

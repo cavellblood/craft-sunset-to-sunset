@@ -1,0 +1,40 @@
+{
+    "name": "cavellblood/craft-sunset-to-sunset",
+    "description": "Keep the hours of the Sabbath holy.",
+    "type": "craft-plugin",
+    "version": "2.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "sunset to sunset"
+    ],
+    "support": {
+        "docs": "https://github.com/cavellblood/craft-sunset-to-sunset/blob/master/README.md",
+        "issues": "https://github.com/cavellblood/craft-sunset-to-sunset/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cavell L. Blood",
+            "homepage": "https://cavellblood.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "cavellblood\\sunsettosunset\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Sunset to Sunset",
+        "handle": "sunset-to-sunset",
+        "hasCpSettings": true,
+        "hasCpSection": true,
+        "changelogUrl": "https://raw.githubusercontent.com/cavellblood/craft-sunset-to-sunset/master/CHANGELOG.md",
+        "class": "cavellblood\\sunsettosunset\\SunsetToSunset"
+    }
+}
