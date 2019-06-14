@@ -11,49 +11,52 @@
 
     <input type="hidden" name="action" value="plugins/save-plugin-settings">
     <input type="hidden" name="pluginHandle" value="sunset-to-sunset">
-    <input type="hidden" name="redirect" value="sunset-to-sunset/message">
 
-    {{ forms.textField({
-	    first:        true,
-        label:        'Banner Message'|t('sunset-to-sunset'),
-        instructions: 'Enter the message that should be shown in the banner before the store closes.'|t('sunset-to-sunset'),
-        id:           'bannerMessage',
-        name:         'bannerMessage',
-        placeholder:  '',
-        value:        settings.bannerMessage
-    }) }}
+    {% namespace 'settings' %}
 
-	{{ forms.textareaField({
-		label:        'Full Message'|t('sunset-to-sunset'),
-		instructions: 'Enter the full message that should be shown during Sabbath.'|t('sunset-to-sunset'),
-		id:           'message',
-		name:         'message',
-		placeholder:  '',
-		value:        settings.message
-	}) }}
+        {{ forms.textField({
+            first:        true,
+            label:        'Banner Message'|t('sunset-to-sunset'),
+            instructions: 'Enter the message that should be shown in the banner before the store closes.'|t('sunset-to-sunset'),
+            id:           'bannerMessage',
+            name:         'bannerMessage',
+            placeholder:  '',
+            value:        settings.bannerMessage
+        }) }}
 
-    {{ forms.textField({
-        label:        'Show Banner Message Time'|t('sunset-to-sunset'),
-        instructions: 'Enter the **number of minutes** before sunset that the banner message should appear.'|t('sunset-to-sunset'),
-        id:           'showMessageTime',
-        name:         'showMessageTime',
-        type:         'number',
-	    class:        'code',
-        size:         '4',
-        placeholder:  '',
-        value:        settings.showMessageTime
-    }) }}
+        {{ forms.textareaField({
+            label:        'Full Message'|t('sunset-to-sunset'),
+            instructions: 'Enter the full message that should be shown during Sabbath.'|t('sunset-to-sunset'),
+            id:           'message',
+            name:         'message',
+            placeholder:  '',
+            value:        settings.message
+        }) }}
 
-    {{ forms.textField({
-        label:        'Guard'|t('sunset-to-sunset'),
-        instructions: 'Enter the **number of minutes** to add to the edges of the Sabbath hours.'|t('sunset-to-sunset'),
-        id:           'guard',
-        name:         'guard',
-        type:         'number',
-	    class:        'code',
-        size:         '4',
-        placeholder:  '',
-        value:        settings.guard
-    }) }}
+        {{ forms.textField({
+            label:        'Show Banner Message Time'|t('sunset-to-sunset'),
+            instructions: 'Enter the **number of minutes** before sunset that the banner message should appear.'|t('sunset-to-sunset'),
+            id:           'showMessageTime',
+            name:         'showMessageTime',
+            type:         'number',
+            class:        'code',
+            size:         '4',
+            placeholder:  '',
+            value:        settings.showMessageTime
+        }) }}
+
+        {{ forms.textField({
+            label:        'Guard'|t('sunset-to-sunset'),
+            instructions: 'Enter the **number of minutes** to add to the edges of the Sabbath hours.'|t('sunset-to-sunset'),
+            id:           'guard',
+            name:         'guard',
+            type:         'number',
+            class:        'code',
+            size:         '4',
+            placeholder:  '',
+            value:        settings.guard
+        }) }}
+
+    {% endnamespace %}
 
 {% endblock %}

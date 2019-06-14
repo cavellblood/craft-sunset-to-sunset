@@ -9,63 +9,65 @@
 
     <input type="hidden" name="action" value="plugins/savePluginSettings">
     <input type="hidden" name="pluginClass" value="SunsetToSunset">
-    <input type="hidden" name="redirect" value="sunsettosunset/location">
 
+    {% namespace 'settings' %}
 
-    {{ forms.textField({
-        label:        'Latitude'|t('sunset-to-sunset'),
-        required:     true,
-        instructions: 'Enter the latitude of the target sunset location.'|t('sunset-to-sunset'),
-        id:           'latitude',
-        name:         'latitude',
-        type:         'text',
-        size:         '12',
-        class:        'code',
-        placeholder:  '0.0000000',
-        value:        settings.latitude,
-        disabled:     'latitude' in overrides,
-        warning:      'latitude' in overrides ? configWarning('latitude'),
-        errors:       settings.getErrors('latitude')
-    }) }}
+        {{ forms.textField({
+            label:        'Latitude'|t('sunset-to-sunset'),
+            required:     true,
+            instructions: 'Enter the latitude of the target sunset location.'|t('sunset-to-sunset'),
+            id:           'latitude',
+            name:         'latitude',
+            type:         'text',
+            size:         '12',
+            class:        'code',
+            placeholder:  '0.0000000',
+            value:        settings.latitude,
+            disabled:     configWarning('latitude', 'sunset-to-sunset'),
+            warning:      configWarning('latitude', 'sunset-to-sunset'),
+            errors:       settings.getErrors('latitude')
+        }) }}
 
-    {{ forms.textField({
-        label:        'Latitude'|t('sunset-to-sunset'),
-        required:     true,
-        instructions: 'Enter the longitude of the target sunset location.'|t('sunset-to-sunset'),
-        id:           'settings-longitude',
-        name:         'settings[longitude]',
-        type:         'text',
-        size:         '12',
-        class:        'code',
-        placeholder:  '0.0000000',
-        value:        settings['longitude'],
-        disabled:     'longitude' in overrides,
-        warning:      'longitude' in overrides ? configWarning('longitude'),
-        errors:       settings.getErrors('longitude')
-    }) }}
+        {{ forms.textField({
+            label:        'Longitude'|t('sunset-to-sunset'),
+            required:     true,
+            instructions: 'Enter the longitude of the target sunset location.'|t('sunset-to-sunset'),
+            id:           'longitude',
+            name:         'longitude',
+            type:         'text',
+            size:         '12',
+            class:        'code',
+            placeholder:  '0.0000000',
+            value:        settings.longitude,
+            disabled:     configWarning('longitude', 'sunset-to-sunset'),
+            warning:      configWarning('longitude', 'sunset-to-sunset'),
+            errors:       settings.getErrors('longitude')
+        }) }}
 
-    {{ forms.selectField({
-        label:        'Time Zone'|t('sunset-to-sunset'),
-        instructions: 'Select the time zone of the target sunset location.'|t('sunset-to-sunset'),
-        id:           'settings-timezone',
-        name:         'settings[timezone]',
-        value:        settings['timezone'],
-        options: {
-            'America' : {
-                optgroup: 'America',
+        {{ forms.selectField({
+            label:        'Time Zone'|t('sunset-to-sunset'),
+            instructions: 'Select the time zone of the target sunset location.'|t('sunset-to-sunset'),
+            id:           'timezone',
+            name:         'timezone',
+            value:        settings.timezone,
+            options: {
+                'America' : {
+                    optgroup: 'America',
+                },
+                'Pacific/Honolulu' : 'Pacific/Honolulu',
+                'America/Anchorage' : 'America/Anchorage',
+                'America/Los_Angeles' : 'America/Los_Angeles',
+                'America/Phoenix' : 'America/Phoenix',
+                'America/Chicago' : 'America/Chicago',
+                'America/New_York' : 'America/New York',
+                'America/Denver' : 'America/Denver',
             },
-            'Pacific/Honolulu' : 'Pacific/Honolulu',
-            'America/Anchorage' : 'America/Anchorage',
-            'America/Los_Angeles' : 'America/Los_Angeles',
-            'America/Phoenix' : 'America/Phoenix',
-            'America/Chicago' : 'America/Chicago',
-            'America/New_York' : 'America/New York',
-            'America/Denver' : 'America/Denver',
-        },
-        class:        'timezone' in overrides ? 'disabled',
-        disabled:     'timezone' in overrides,
-        warning:      'timezone' in overrides ? configWarning('timezone'),
-        errors:       settings.getErrors('timezone')
-    }) }}
+            class:        configWarning('timezone', 'sunset-to-sunset') ? 'disabled',
+            disabled:     configWarning('timezone', 'sunset-to-sunset'),
+            warning:      configWarning('timezone', 'sunset-to-sunset'),
+            errors:       settings.getErrors('timezone')
+        }) }}
+
+    {% endnamespace %}
 
 {% endblock %}

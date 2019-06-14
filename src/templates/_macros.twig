@@ -1,7 +1,8 @@
-{% macro configWarning(setting) -%}
-    {% set setting = '<code>'~setting~'</code>' %}
-    {{ "This is being overridden by the {setting} config setting in your <code>{file}</code> config file."|t('sunset-to-sunset', {
-        setting: setting,
-        file: 'sunset-to-sunset.php'
-    })|raw }}
+{% macro configWarning(setting, file) -%}
+    {%- set configArray = craft.app.config.getConfigFromFile(file) -%}
+    {%- if configArray[setting] is defined -%}
+        {{- "This is being overridden by the `#{setting}` setting in the `config/#{file}.php` file." |raw }}
+    {%- else -%}
+        {{ false }}
+    {%- endif -%}
 {%- endmacro %}

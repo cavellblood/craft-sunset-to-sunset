@@ -158,14 +158,10 @@ class SunsetToSunset extends Plugin
         $settings = $this->getSettings();
         $settings->validate();
 
-        // Get the settings that are being defined by the config file
-        $overrides = Craft::$app->getConfig()->getConfigFromFile(strtolower($this->handle));
-
         return Craft::$app->view->renderTemplate(
             'sunset-to-sunset/settings',
             [
                 'settings' => $settings,
-                'overrides' => array_keys($overrides),
             ]
         );
     }

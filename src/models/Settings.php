@@ -39,7 +39,6 @@ class Settings extends Model
      *
      * @var string
      */
-    public $someAttribute = 'Some Default';
     public $pluginName = 'Sunset to Sunset';
     public $latitude;
     public $longitude;
@@ -108,6 +107,8 @@ class Settings extends Model
                     'latitude',
                     'longitude',
                     'timezone',
+                    'message',
+                    'specificRedirectUrls',
                     'bannerMessage',
                     'templateRedirect',
                     'bannerCssPosition',
@@ -118,13 +119,11 @@ class Settings extends Model
             ],
             [
                 [
-                    'gaurd',
+                    'guard',
                     'showMessageTime'
                 ],
                 'integer'
             ],
-            ['message', 'mixed'],
-            ['specificRedirectUrls', 'mixed'],
             ['showBannerOnSpecificUrls', 'boolean'],
             [
                  [
