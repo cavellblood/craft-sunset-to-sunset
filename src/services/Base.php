@@ -43,27 +43,12 @@ class Base extends Component
      *
      * @return mixed
      */
-    public function exampleService()
-    {
-        $result = 'something';
-        // Check our Plugin's settings for `someAttribute`
-        if (SunsetToSunset::$plugin->getSettings()->message) {
-            $result = SunsetToSunset::$plugin->getSettings()->message;
-        }
 
-        echo $result;
+    public function getSetting($setting)
+    {
+        $result = SunsetToSunset::$plugin->getSettings()->$setting;
 
         return $result;
-    }
-
-    /**
-     * @return float
-     */
-    public function getLatitude()
-    {
-        $result = SunsetToSunset::$plugin->getSettings()->latitude;
-
-        return (float)$result;
     }
 
     /**
@@ -90,15 +75,15 @@ class Base extends Component
     public function getClosingTime()
     {
         // Set default time zone for date_sun_info to work with
-        date_default_timezone_set( $this->getTimeZone() );
+        date_default_timezone_set( $this->getSetting('timezone') );
 
         // Get closing date and time information
         $daysToClosing     = $this->getClosingDayNumber() - date('w');
         $closingDay        = strtotime( date( 'Y-m-d' ) . '+ '. $daysToClosing .' days');
-        $closingDaySunInfo = date_sun_info( $closingDay, $this->getLatitude(), $this->getLongitude() );
+        $closingDaySunInfo = date_sun_info( $closingDay, $this->getSetting('latitude'), $this->getSetting('longitude') );
 
         // Set closing time
-        $result = (int)$closingDaySunInfo['sunset'] - ( $this->getGuard() * 60 );
+        $result = (int)$closingDaySunInfo['sunset'] - ( $this->getSetting('guard') * 60 );
 
         return $result;
     }

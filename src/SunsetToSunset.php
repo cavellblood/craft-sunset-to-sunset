@@ -114,7 +114,7 @@ class SunsetToSunset extends Plugin
                     break;
             }
         } else {
-            $duringWeek = date('U') < $plugin->getClosingTime();
+            $duringWeek = date('U') < SunsetToSunset::$plugin->base->getClosingTime();
             $beforeSabbath = date('U') < $plugin->getClosingTime() && date('U') > $plugin->getShowMessageTime();
             $duringSabbath = date('U') >= $plugin->getClosingTime() && date('U') <= $plugin->getOpeningTime() && date('w') >= $plugin->getClosingDayNumber();
             $afterSabbath  = date('U') > $plugin->getOpeningTime() && date('w') >= $plugin->getOpeningDayNumber();
