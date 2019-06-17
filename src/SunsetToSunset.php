@@ -1,6 +1,6 @@
 <?php
 /**
- * Sunset to Sunset plugin for Craft CMS 3.x
+ * Sunset To Sunset plugin for Craft CMS 3.x
  *
  * Keep the hours of the Sabbath holy.
  *
@@ -10,7 +10,7 @@
 
 namespace cavellblood\sunsettosunset;
 
-use cavellblood\sunsettosunset\services\SunsetToSunsetService as SunsetToSunsetServiceService;
+use cavellblood\sunsettosunset\services\Base as BaseService;
 use cavellblood\sunsettosunset\variables\SunsetToSunsetVariable;
 use cavellblood\sunsettosunset\models\Settings;
 
@@ -38,7 +38,7 @@ use yii\base\Event;
  * @package   SunsetToSunset
  * @since     2.0.0
  *
- * @property  SunsetToSunsetServiceService $sunsetToSunsetService
+ * @property  BaseService $base
  * @property  Settings $settings
  * @method    Settings getSettings()
  */

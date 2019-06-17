@@ -1,6 +1,6 @@
 <?php
 /**
- * Sunset to Sunset plugin for Craft CMS 3.x
+ * Sunset To Sunset plugin for Craft CMS 3.x
  *
  * Keep the hours of the Sabbath holy.
  *
@@ -16,7 +16,7 @@ use Craft;
 use craft\base\Component;
 
 /**
- * SunsetToSunsetService Service
+ * Base Service
  *
  * All of your plugin’s business logic should go in services, including saving data,
  * retrieving data, etc. They provide APIs that your controllers, template variables,
@@ -28,7 +28,7 @@ use craft\base\Component;
  * @package   SunsetToSunset
  * @since     2.0.0
  */
-class SunsetToSunsetService extends Component
+class Base extends Component
 {
     // Public Methods
     // =========================================================================
@@ -39,7 +39,7 @@ class SunsetToSunsetService extends Component
      *
      * From any other plugin file, call it like this:
      *
-     *     SunsetToSunset::$plugin->sunsetToSunsetService->exampleService()
+     *     SunsetToSunset::$plugin->base->exampleService()
      *
      * @return mixed
      */
