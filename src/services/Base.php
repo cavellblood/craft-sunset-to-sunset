@@ -47,9 +47,100 @@ class Base extends Component
     {
         $result = 'something';
         // Check our Plugin's settings for `someAttribute`
-        if (SunsetToSunset::$plugin->getSettings()->someAttribute) {
+        if (SunsetToSunset::$plugin->getSettings()->message) {
+            $result = SunsetToSunset::$plugin->getSettings()->message;
         }
 
+        echo $result;
+
         return $result;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude()
+    {
+        $result = SunsetToSunset::$plugin->getSettings()->latitude;
+
+        return (float)$result;
+    }
+
+    /**
+     * @return int
+     */
+    public function getClosingDayNumber()
+    {
+        // Set day of week: zero-based index
+        return 5;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOpeningDayNumber()
+    {
+        // Set day of week: zero-based index
+        return 6;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getClosingTime()
+    {
+        // Set default time zone for date_sun_info to work with
+        date_default_timezone_set( $this->getTimeZone() );
+
+        // Get closing date and time information
+        $daysToClosing     = $this->getClosingDayNumber() - date('w');
+        $closingDay        = strtotime( date( 'Y-m-d' ) . '+ '. $daysToClosing .' days');
+        $closingDaySunInfo = date_sun_info( $closingDay, $this->getLatitude(), $this->getLongitude() );
+
+        // Set closing time
+        $result = (int)$closingDaySunInfo['sunset'] - ( $this->getGuard() * 60 );
+
+        return $result;
+    }
+
+    /**
+     * @return float|int
+     */
+    public function getOpeningTime()
+    {
+        // Set default time zone for date_sun_info to work with
+        date_default_timezone_set( $this->getTimeZone() );
+
+        // Get opening date and time information
+        $daysToOpening     = $this->getOpeningDayNumber() - date('w');
+        $openingDay        = strtotime( date( 'Y-m-d' ) . '+ '. $daysToOpening .' days');
+        $openingDaySunInfo = date_sun_info( $openingDay, $this->getLatitude(), $this->getLongitude() );
+
+        // Set opening time
+        $result = (int)$openingDaySunInfo['sunset'] + ( $this->getGuard() * 60 );
+
+        return $result;
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function render()
+    {
+        $oldTemplatesPath = craft()->path->getTemplatesPath();
+        $newTemplatesPath = craft()->path->getPluginsPath().'sunsettosunset/templates/';
+        craft()->path->setTemplatesPath($newTemplatesPath);
+
+        $vars = array(
+            'bannerMessage' => craft()->sunsetToSunset->getBannerMessage(),
+            'openingTime' => craft()->sunsetToSunset->getOpeningTime(),
+            'closingTime' => craft()->sunsetToSunset->getClosingTime()
+        );
+
+        $html = craft()->templates->render('frontend/message', $vars);
+        craft()->path->setTemplatesPath($oldTemplatesPath);
+
+        return $html;
     }
 }

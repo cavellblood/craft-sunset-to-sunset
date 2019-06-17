@@ -1,9 +1,9 @@
 {# @var craft \craft\web\twig\variables\CraftVariable #}
 {#
 /**
- * Sunset to Sunset plugin for Craft CMS 3.x
+ * Sunset To Sunset plugin for Craft CMS 3.x
  *
- * Sunset to Sunset index.twig
+ * Sunset To Sunset index.twig
  *
  * @author    Cavell L. Blood
  * @copyright Copyright (c) 2019 Cavell L. Blood
@@ -13,38 +13,4 @@
  */
 #}
 
-{% extends "sunset-to-sunset/_layouts" %}
-{% from "sunsettosunset/_macros" import configWarning %}
-
-{% import "_includes/forms" as forms %}
-
-{# Link for the ? icon at the bottom of the page #}
-{% set docsUrl = "https://github.com/cavellblood/sunset-to-sunset/blob/master/README.md" %}
-
-{# The title of this CP section #}
-{% set title = "Sunset to Sunset" %}
-
-{# The URL to this plugin's base CP section #}
-{% set pluginCpUrl = url('sunset-to-sunset') %}
-
-{% set title = 'Message' %}
-{% set selectedTab = 'message' %}
-
-{% set fullPageForm = true %}
-
-{# Get a URL to an image in our AssetBundle #}
-{% set iconUrl = view.getAssetManager().getPublishedUrl('@cavellblood/sunsettosunset/assetbundles/indexcpsection/dist', true) ~ '/img/Index-icon.svg' %}
-
-{# Content that should appear in the page header#}
-{% block actionButton %}
-    <div class="buttons">
-        <a href="{{ pluginCpUrl }}" class="btn submit icon">{{ "Save"|t('sunset-to-sunset') }}</a>
-    </div>
-{% endblock %}
-
-{# The content of the CP Section#}
-{% set content %}
-    <h2>{{ "Index CP Section body goes here"|t('sunset-to-sunset') }}</h2>
-    <img src="{{ iconUrl }}" height="64" width="64" />
-    <p class="textline"></p>
-{% endset %}
+{% redirect url('sunset-to-sunset/advanced') %}

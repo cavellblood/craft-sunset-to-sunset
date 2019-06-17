@@ -4,11 +4,13 @@
 
 {% set selectedTab = 'location' %}
 
+{% set fullPageForm = true %}
+
 {% block blockContent %}
 	{{ parent() }}
 
-    <input type="hidden" name="action" value="plugins/savePluginSettings">
-    <input type="hidden" name="pluginClass" value="SunsetToSunset">
+    <input type="hidden" name="action" value="plugins/save-plugin-settings">
+    <input type="hidden" name="pluginHandle" value="sunset-to-sunset">
 
     {% namespace 'settings' %}
 

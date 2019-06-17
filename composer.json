@@ -1,5 +1,5 @@
 {
-    "name": "cavellblood/craft-sunset-to-sunset",
+    "name": "cavellblood/sunset-to-sunset",
     "description": "Keep the hours of the Sabbath holy.",
     "type": "craft-plugin",
     "version": "2.0.0",
@@ -11,8 +11,8 @@
         "sunset to sunset"
     ],
     "support": {
-        "docs": "https://github.com/cavellblood/craft-sunset-to-sunset/blob/master/README.md",
-        "issues": "https://github.com/cavellblood/craft-sunset-to-sunset/issues"
+        "docs": "https://github.com/cavellblood/sunset-to-sunset/blob/master/README.md",
+        "issues": "https://github.com/cavellblood/sunset-to-sunset/issues"
     },
     "license": "MIT",
     "authors": [
@@ -22,19 +22,22 @@
         }
     ],
     "require": {
-        "craftcms/cms": "^3.0.0"
+        "craftcms/cms": "^3.0.0-RC1"
     },
     "autoload": {
         "psr-4": {
-            "cavellblood\\sunsettosunset\\": "src/"
+          "cavellblood\\sunsettosunset\\": "src/"
         }
     },
     "extra": {
-        "name": "Sunset to Sunset",
+        "name": "Sunset To Sunset",
         "handle": "sunset-to-sunset",
         "hasCpSettings": true,
         "hasCpSection": true,
-        "changelogUrl": "https://raw.githubusercontent.com/cavellblood/craft-sunset-to-sunset/master/CHANGELOG.md",
+        "changelogUrl": "https://raw.githubusercontent.com/cavellblood/sunset-to-sunset/master/CHANGELOG.md",
+        "components": {
+            "base": "cavellblood\\sunsettosunset\\services\\Base"
+        },
         "class": "cavellblood\\sunsettosunset\\SunsetToSunset"
     }
 }

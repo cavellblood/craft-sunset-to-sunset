@@ -1,6 +1,6 @@
 <?php
 /**
- * Sunset to Sunset plugin for Craft CMS 3.x
+ * Sunset To Sunset plugin for Craft CMS 3.x
  *
  * Keep the hours of the Sabbath holy.
  *
@@ -9,9 +9,9 @@
  */
 
 /**
- * Sunset to Sunset config.php
+ * Sunset To Sunset config.php
  *
- * This file exists only as a template for the Sunset to Sunset settings.
+ * This file exists only as a template for the Sunset To Sunset settings.
  * It does nothing on its own.
  *
  * Don't edit this file, instead copy it to 'craft/config' as 'sunset-to-sunset.php'

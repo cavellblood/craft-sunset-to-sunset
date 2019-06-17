@@ -1,6 +1,6 @@
 <?php
 /**
- * Sunset to Sunset plugin for Craft CMS 3.x
+ * Sunset To Sunset plugin for Craft CMS 3.x
  *
  * Keep the hours of the Sabbath holy.
  *
@@ -15,7 +15,7 @@ use cavellblood\sunsettosunset\SunsetToSunset;
 use Craft;
 
 /**
- * Sunset to Sunset Variable
+ * Sunset To Sunset Variable
  *
  * Craft allows plugins to provide their own template variables, accessible from
  * the {{ craft }} global variable (e.g. {{ craft.sunsetToSunset }}).

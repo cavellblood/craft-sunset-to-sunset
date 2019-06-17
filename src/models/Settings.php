@@ -54,8 +54,6 @@ class Settings extends Model
     public $bannerCssBackgroundColor;
     public $simulateTime;
 
-    // Public Methods
-    // =========================================================================
 
     /**
      * @inheritdoc
@@ -89,6 +87,9 @@ class Settings extends Model
         }
     }
 
+    // Public Methods
+    // =========================================================================
+
     /**
      * Returns the validation rules for attributes.
      *
@@ -101,7 +102,7 @@ class Settings extends Model
      */
     public function rules()
     {
-        return [            
+        return [
             [
                 [
                     'latitude',
@@ -126,9 +127,9 @@ class Settings extends Model
             ],
             ['showBannerOnSpecificUrls', 'boolean'],
             [
-                 [
-                     'latitude',
-                     'longitude'
+                [
+                    'latitude',
+                    'longitude'
                 ],
                 'required'
             ],

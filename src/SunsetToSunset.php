@@ -87,24 +87,108 @@ class SunsetToSunset extends Plugin
         $this->_registerCpRoutes();
         $this->_registerVariables();
 
-        /**
-         * Logging in Craft involves using one of the following methods:
-         *
-         * Craft::trace(): record a message to trace how a piece of code runs. This is mainly for development use.
-         * Craft::info(): record a message that conveys some useful information.
-         * Craft::warning(): record a warning message that indicates something unexpected has happened.
-         * Craft::error(): record a fatal error that should be investigated as soon as possible.
-         *
-         * Unless `devMode` is on, only Craft::warning() & Craft::error() will log to `craft/storage/logs/web.log`
-         *
-         * It's recommended that you pass in the magic constant `__METHOD__` as the second parameter, which sets
-         * the category to the method (prefixed with the fully qualified class name) where the constant appears.
-         *
-         * To enable the Yii debug toolbar, go to your user account in the AdminCP and check the
-         * [] Show the debug toolbar on the front end & [] Show the debug toolbar on the Control Panel
-         *
-         * http://www.yiiframework.com/doc-2.0/guide-runtime-logging.html
-         */
+        $request = Craft::$app->request;
+
+//        SunsetToSunset::$plugin->base->getLatitude();
+//        SunsetToSunset::$plugin->getSettings()->latitude;
+
+        $template = SunsetToSunset::$plugin->getSettings()->templateRedirect;
+        $urlMatchTemplate = ($request->url === $template);
+
+        $simulateTime = SunsetToSunset::$plugin->getSettings()->simulateTime;
+        $duringWeek = false;
+        $beforeSabbath = false;
+        $duringSabbath = false;
+        $afterSabbath = false;
+
+        if ($simulateTime) {
+            switch ($simulateTime) {
+                case 'before':
+                    $beforeSabbath = true;
+                    break;
+                case 'during':
+                    $duringSabbath = true;
+                    break;
+                case 'after':
+                    $afterSabbath = true;
+                    break;
+            }
+        } else {
+            $duringWeek = date('U') < $plugin->getClosingTime();
+            $beforeSabbath = date('U') < $plugin->getClosingTime() && date('U') > $plugin->getShowMessageTime();
+            $duringSabbath = date('U') >= $plugin->getClosingTime() && date('U') <= $plugin->getOpeningTime() && date('w') >= $plugin->getClosingDayNumber();
+            $afterSabbath  = date('U') > $plugin->getOpeningTime() && date('w') >= $plugin->getOpeningDayNumber();
+        }
+
+        // Convert specific redirect urls to array
+        $specificRedirectUrls = preg_split("/\r\n|\n|\r/", $plugin->getSpecificRedirectUrls());
+
+        if ($request->isSiteRequest()) {
+
+            // Before Sabbath
+            if ( $beforeSabbath )
+            {
+                if ($plugin->getShowBannerOnSpecificUrls() && count($specificRedirectUrls)) {
+                    foreach ($specificRedirectUrls as $url) {
+                        if (preg_match('('. $url . ')i', $request->url)) {
+                            // Render Template
+                            craft()->templates->hook('sunsetToSunsetRender', function()
+                            {
+                                return craft()->sunsetToSunset->render();
+                            });
+                        }
+                    }
+                } else {
+                    // Render Template
+                    craft()->templates->hook('sunsetToSunsetRender', function()
+                    {
+                        return craft()->sunsetToSunset->render();
+                    });
+                }
+            }
+
+            // During Sabbath and not on Sabbath URL
+            if ( $duringSabbath && !$urlMatchTemplate )
+            {
+                if (count($specificRedirectUrls)) {
+                    foreach ($specificRedirectUrls as $url) {
+                        if (preg_match('('. $url . ')i', $request->url)) {
+                            $request->redirect($template, true, 302);
+                        }
+                    }
+                } else {
+                    $request->redirect($template, true, 302);
+                }
+            }
+
+            // During the week or after Sabbath
+            if ( $duringWeek || $afterSabbath )
+            {
+                // If site is open and on message template redirect
+                if ( $request->isSiteRequest() && $urlMatchTemplate ) {
+                    $request->redirect('/', true, 302);
+                }
+            }
+        }
+
+/**
+ * Logging in Craft involves using one of the following methods:
+ *
+ * Craft::trace(): record a message to trace how a piece of code runs. This is mainly for development use.
+ * Craft::info(): record a message that conveys some useful information.
+ * Craft::warning(): record a warning message that indicates something unexpected has happened.
+ * Craft::error(): record a fatal error that should be investigated as soon as possible.
+ *
+ * Unless `devMode` is on, only Craft::warning() & Craft::error() will log to `craft/storage/logs/web.log`
+ *
+ * It's recommended that you pass in the magic constant `__METHOD__` as the second parameter, which sets
+ * the category to the method (prefixed with the fully qualified class name) where the constant appears.
+ *
+ * To enable the Yii debug toolbar, go to your user account in the AdminCP and check the
+ * [] Show the debug toolbar on the front end & [] Show the debug toolbar on the Control Panel
+ *
+ * http://www.yiiframework.com/doc-2.0/guide-runtime-logging.html
+ */
         Craft::info(
             Craft::t(
                 'sunset-to-sunset',
@@ -117,20 +201,12 @@ class SunsetToSunset extends Plugin
 
     public function getPluginName()
     {
-        return Craft::t('feed-me', $this->getSettings()->pluginName);
+        return Craft::t('sunset-to-sunset', $this->getSettings()->pluginName);
     }
 
     public function getSettingsUrl()
     {
         return 'sunset-to-sunset';
-    }
-
-    public function getCpNavItem()
-    {
-        $navItem = parent::getCpNavItem();
-        $navItem['label'] = $this->getPluginName();
-
-        return $navItem;
     }
 
     // Protected Methods

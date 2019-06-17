@@ -1,6 +1,6 @@
 <?php
 /**
- * Sunset to Sunset plugin for Craft CMS 3.x
+ * Sunset To Sunset plugin for Craft CMS 3.x
  *
  * Keep the hours of the Sabbath holy.
  *
@@ -9,7 +9,7 @@
  */
 
 /**
- * Sunset to Sunset en Translation
+ * Sunset To Sunset en Translation
  *
  * Returns an array with the string to be translated (as passed to `Craft::t('sunset-to-sunset', '...')`) as
  * the key, and the translation as the value.
@@ -21,5 +21,5 @@
  * @since     2.0.0
  */
 return [
-    'Sunset to Sunset plugin loaded' => 'Sunset to Sunset plugin loaded',
+    'Sunset To Sunset plugin loaded' => 'Sunset To Sunset plugin loaded',
 ];
