@@ -115,15 +115,15 @@ class SunsetToSunset extends Plugin
             }
         } else {
             $duringWeek = date('U') < SunsetToSunset::$plugin->base->getClosingTime();
-            $beforeSabbath = date('U') < $plugin->getClosingTime() && date('U') > $plugin->getShowMessageTime();
-            $duringSabbath = date('U') >= $plugin->getClosingTime() && date('U') <= $plugin->getOpeningTime() && date('w') >= $plugin->getClosingDayNumber();
-            $afterSabbath  = date('U') > $plugin->getOpeningTime() && date('w') >= $plugin->getOpeningDayNumber();
+            $beforeSabbath = date('U') < SunsetToSunset::$plugin->base->getClosingTime() && date('U') > SunsetToSunset::$plugin->base->getShowMessageTime();
+            $duringSabbath = date('U') >= SunsetToSunset::$plugin->base->getClosingTime() && date('U') <= SunsetToSunset::$plugin->base->getOpeningTime() && date('w') >= SunsetToSunset::$plugin->base->getClosingDayNumber();
+            $afterSabbath  = date('U') > SunsetToSunset::$plugin->base->getOpeningTime() && date('w') >= SunsetToSunset::$plugin->base->getOpeningDayNumber();
         }
 
         // Convert specific redirect urls to array
-        $specificRedirectUrls = preg_split("/\r\n|\n|\r/", $plugin->getSpecificRedirectUrls());
+        $specificRedirectUrls = preg_split("/\r\n|\n|\r/", SunsetToSunset::$plugin->getSettings()->specificRedirectUrls);
 
-        if ($request->isSiteRequest()) {
+        if ($request->isSiteRequest) {
 
             // Before Sabbath
             if ( $beforeSabbath )
@@ -165,7 +165,7 @@ class SunsetToSunset extends Plugin
             if ( $duringWeek || $afterSabbath )
             {
                 // If site is open and on message template redirect
-                if ( $request->isSiteRequest() && $urlMatchTemplate ) {
+                if ( $request->isSiteRequest && $urlMatchTemplate ) {
                     $request->redirect('/', true, 302);
                 }
             }

@@ -70,6 +70,19 @@ class Base extends Component
     }
 
     /**
+     * @return int
+     */
+    public function getShowMessageTime()
+    {
+        $time = SunsetToSunset::$plugin->getSettings()->showMessageTime;
+
+        // Set opening time
+        $result = $this->getClosingTime() - ( $time * 60 );
+
+        return (int)$result;
+    }
+
+    /**
      * @return float|int
      */
     public function getClosingTime()
@@ -94,15 +107,15 @@ class Base extends Component
     public function getOpeningTime()
     {
         // Set default time zone for date_sun_info to work with
-        date_default_timezone_set( $this->getTimeZone() );
+        date_default_timezone_set( $this->getSetting('timezone') );
 
         // Get opening date and time information
         $daysToOpening     = $this->getOpeningDayNumber() - date('w');
         $openingDay        = strtotime( date( 'Y-m-d' ) . '+ '. $daysToOpening .' days');
-        $openingDaySunInfo = date_sun_info( $openingDay, $this->getLatitude(), $this->getLongitude() );
+        $openingDaySunInfo = date_sun_info( $openingDay, $this->getSetting('latitude'), $this->getSetting('longitude') );
 
         // Set opening time
-        $result = (int)$openingDaySunInfo['sunset'] + ( $this->getGuard() * 60 );
+        $result = (int)$openingDaySunInfo['sunset'] + ( $this->getSetting('guard') * 60 );
 
         return $result;
     }
