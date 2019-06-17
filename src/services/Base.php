@@ -124,16 +124,18 @@ class Base extends Component
      * @return string
      * @throws Exception
      */
-    public function render()
+    public function renderBanner()
     {
-        $oldTemplatesPath = craft()->path->getTemplatesPath();
-        $newTemplatesPath = craft()->path->getPluginsPath().'sunsettosunset/templates/';
+
+        $oldTemplatesPath = Craft::$app->path->getSiteTemplatesPath();
+        $newTemplatesPath = Craft::$app->path->getCpTemplatesPath().'sunsettosunset/templates/';
+        Craft::$app->path->
         craft()->path->setTemplatesPath($newTemplatesPath);
 
         $vars = array(
-            'bannerMessage' => craft()->sunsetToSunset->getBannerMessage(),
-            'openingTime' => craft()->sunsetToSunset->getOpeningTime(),
-            'closingTime' => craft()->sunsetToSunset->getClosingTime()
+            'bannerMessage' => SunsetToSunset::$plugin->getSettings()->bannerMessage(),
+            'openingTime' => SunsetToSunset::$plugin->base->getOpeningTime(),
+            'closingTime' => SunsetToSunset::$plugin->base->getClosingTime()
         );
 
         $html = craft()->templates->render('frontend/message', $vars);
