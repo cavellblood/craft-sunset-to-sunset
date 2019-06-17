@@ -1,5 +1,5 @@
 /**
- * Sunset to Sunset plugin for Craft CMS
+ * Sunset To Sunset plugin for Craft CMS
  *
  * Index Field JS
  *

@@ -1,7 +1,7 @@
 /**
- * Sunset to Sunset plugin for Craft CMS
+ * Sunset To Sunset plugin for Craft CMS
  *
- * Sunset to Sunset JS
+ * Sunset To Sunset JS
  *
  * @author    Cavell L. Blood
  * @copyright Copyright (c) 2019 Cavell L. Blood
