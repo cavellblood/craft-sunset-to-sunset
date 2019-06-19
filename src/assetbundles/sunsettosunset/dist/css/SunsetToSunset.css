@@ -83,6 +83,8 @@ div.half-width-field-left {
 }
 
 .sts-message-area {
+    font-size: 1rem;
+    line-height: 1.5rem;
     width: 100%;
     text-align: center;
     padding-bottom: 1rem;
