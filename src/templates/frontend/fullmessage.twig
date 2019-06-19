@@ -1,0 +1,20 @@
+{% do view.registerAssetBundle("cavellblood\\sunsettosunset\\assetbundles\\sunsettosunset\\SunsetToSunsetAsset") %}
+<div class="sts-full-message__container">
+
+    <div class="sts-layout  sts-message-area">
+        <div class="sts-layout__item">
+            <p>
+                {{ message }}
+            </p>
+        </div>
+        <div class="sts-layout__item">
+            <p>
+            The store will re-open on
+            <strong>
+                <time datetime="{{ openingTime | date('c') }}">{{ openingTime | date('l, F j \\a\\t g:ia T') }}</time>.
+            </strong>
+            </p>
+        </div>
+    </div>
+
+</div>

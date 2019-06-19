@@ -23,29 +23,63 @@ div.half-width-field-left {
 * Banner
 * ========================================================================== */
 
-.sts__container {
+.sts-container {
     background-color: #464646;
     text-align: center;
     color: white;
     padding: 0.5rem 0;
 }
 
-.sts__container--fixed {
+.sts-container--fixed {
     width: 100%;
     z-index: 100;
     top: 0;
 }
 
-.sts__message {
+.sts-message {
     margin: 0.75rem 2rem;
 }
 
-.sts__message p {
+.sts-message p {
     margin: 0 auto;
 }
 
-.sts__message strong {
+.sts-message strong {
     font-weight: 600;
+}
+
+
+.sts-full-message__container {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    background-color: white;
+}
+
+.sts-layout {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+}
+
+.sts-layout .sts-layout__item {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.sts-message-area {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 7%;
+    max-width: 777px;
+    justify-content: center;
 }
 
 

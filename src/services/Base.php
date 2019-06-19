@@ -145,4 +145,27 @@ class Base extends Component
 
         return $html;
     }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function renderFullMessage()
+    {
+
+        $oldMode = Craft::$app->getView()->getTemplateMode();
+        Craft::$app->getView()->setTemplateMode(View::TEMPLATE_MODE_CP);
+
+        $vars = array(
+            'message' => SunsetToSunset::$plugin->getSettings()->message,
+            'openingTime' => SunsetToSunset::$plugin->base->getOpeningTime(),
+            'closingTime' => SunsetToSunset::$plugin->base->getClosingTime()
+        );
+
+        $html = Craft::$app->getView()->renderTemplate('sunset-to-sunset/frontend/fullmessage', $vars);
+
+        Craft::$app->getView()->setTemplateMode($oldMode);
+
+        return $html;
+    }
 }

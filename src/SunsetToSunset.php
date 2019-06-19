@@ -123,12 +123,6 @@ class SunsetToSunset extends Plugin
         // Convert specific redirect urls to array
         $specificRedirectUrls = preg_split("/\r\n|\n|\r/", SunsetToSunset::$plugin->getSettings()->specificRedirectUrls);
 
-        echo 'simulate time: ' . $simulateTime . ';';
-        echo 'during week: ' . $duringWeek . ';';
-        echo 'before Sabbath: ' . $beforeSabbath . ';';
-        echo 'during Sabbath: ' . $duringSabbath . ';';
-        echo 'after Sabbath: ' . $afterSabbath . ';';
-
         if ($request->isSiteRequest) {
 
             // Before Sabbath
@@ -157,7 +151,10 @@ class SunsetToSunset extends Plugin
                 if (count($specificRedirectUrls)) {
                     foreach ($specificRedirectUrls as $url) {
                         if (preg_match('('. $url . ')i', $request->url)) {
-                            $request->redirect($template, true, 302);
+                            // Render Template
+                            Craft::$app->view->hook('sunset-to-sunset-full-message', function(array &$context) {
+                                return SunsetToSunset::$plugin->base->renderFullMessage();
+                            });
                         }
                     }
                 } else {
