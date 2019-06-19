@@ -1,0 +1,21 @@
+{% do view.registerAssetBundle("cavellblood\\sunsettosunset\\assetbundles\\sunsettosunset\\SunsetToSunsetAsset") %}
+<div class="sts__container  {{ bannerCssPosition == 'fixed' ? 'sts__container--fixed' }}"
+     style="
+     {{ bannerCssPosition ? 'position: ' ~ bannerCssPosition ~ ';' }}
+		{{ bannerCssBackgroundColor ? 'background-color: ' ~ bannerCssBackgroundColor ~ ';' }}
+             "
+>
+    <div class="sts__message">
+        <p>
+            {{ bannerMessage }}
+            The store will be closed from
+            <strong>
+                <time datetime="{{ closingTime | date('c') }}">{{ closingTime | date('l, F j \\a\\t g:ia T') }}</time>
+            </strong>
+            and will re-open on
+            <strong>
+                <time datetime="{{ openingTime | date('c') }}">{{ openingTime | date('l, F j \\a\\t g:ia T') }}</time>.
+            </strong>
+        </p>
+    </div>
+</div>
