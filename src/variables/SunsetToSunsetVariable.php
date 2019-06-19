@@ -48,6 +48,6 @@ class SunsetToSunsetVariable
 
     public function getPluginUrl()
     {
-        return 'url here';
+        return 'https://github.com/cavellblood/sunset-to-sunset';
     }
 }
