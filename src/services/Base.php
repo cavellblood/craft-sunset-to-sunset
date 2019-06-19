@@ -14,6 +14,7 @@ use cavellblood\sunsettosunset\SunsetToSunset;
 
 use Craft;
 use craft\base\Component;
+use craft\web\View;
 
 /**
  * Base Service
@@ -127,19 +128,20 @@ class Base extends Component
     public function renderBanner()
     {
 
-        $oldTemplatesPath = Craft::$app->path->getSiteTemplatesPath();
-        $newTemplatesPath = Craft::$app->path->getCpTemplatesPath().'sunsettosunset/templates/';
-        Craft::$app->path->
-        craft()->path->setTemplatesPath($newTemplatesPath);
+        $oldMode = Craft::$app->getView()->getTemplateMode();
+        Craft::$app->getView()->setTemplateMode(View::TEMPLATE_MODE_CP);
 
         $vars = array(
-            'bannerMessage' => SunsetToSunset::$plugin->getSettings()->bannerMessage(),
+            'bannerCssPosition' => SunsetToSunset::$plugin->getSettings()->bannerCssPosition,
+            'bannerCssBackgroundColor' => SunsetToSunset::$plugin->getSettings()->bannerCssBackgroundColor,
+            'bannerMessage' => SunsetToSunset::$plugin->getSettings()->bannerMessage,
             'openingTime' => SunsetToSunset::$plugin->base->getOpeningTime(),
             'closingTime' => SunsetToSunset::$plugin->base->getClosingTime()
         );
 
-        $html = craft()->templates->render('frontend/message', $vars);
-        craft()->path->setTemplatesPath($oldTemplatesPath);
+        $html = Craft::$app->getView()->renderTemplate('sunset-to-sunset/frontend/banner', $vars);
+
+        Craft::$app->getView()->setTemplateMode($oldMode);
 
         return $html;
     }
