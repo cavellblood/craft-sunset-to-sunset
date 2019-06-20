@@ -16,6 +16,7 @@ use cavellblood\sunsettosunset\models\Settings;
 
 use Craft;
 use craft\base\Plugin;
+use craft\helpers\UrlHelper;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
 use craft\web\UrlManager;
@@ -198,6 +199,15 @@ class SunsetToSunset extends Plugin
     public function getSettingsUrl()
     {
         return 'sunset-to-sunset';
+    }
+
+    public function afterInstall()
+    {
+        if (Craft::$app->getRequest()->getIsConsoleRequest()) {
+            return;
+        }
+
+        Craft::$app->controller->redirect(UrlHelper::cpUrl('sunset-to-sunset/location'))->send();
     }
 
     // Protected Methods
