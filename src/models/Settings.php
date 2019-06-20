@@ -47,9 +47,7 @@ class Settings extends Model
     public $message;
     public $bannerMessage;
     public $showMessageTime;
-    public $templateRedirect;
-    public $specificRedirectUrls;
-    public $showBannerOnSpecificUrls;
+    public $showOnSpecificUrls;
     public $bannerCssPosition;
     public $bannerCssBackgroundColor;
     public $simulateTime;
@@ -109,9 +107,8 @@ class Settings extends Model
                     'longitude',
                     'timezone',
                     'message',
-                    'specificRedirectUrls',
+                    'showOnSpecificUrls',
                     'bannerMessage',
-                    'templateRedirect',
                     'bannerCssPosition',
                     'bannerCssBackgroundColor',
                     'simulateTime',
@@ -125,7 +122,6 @@ class Settings extends Model
                 ],
                 'integer'
             ],
-            ['showBannerOnSpecificUrls', 'boolean'],
             [
                 [
                     'latitude',
