@@ -2,8 +2,6 @@
 
 Keep the hours of the Sabbath holy.
 
-![Screenshot](resources/img/plugin-logo.png)
-
 ## Requirements
 
 This plugin requires Craft CMS 3.0.0 or later.
@@ -24,7 +22,7 @@ To install the plugin, follow these instructions.
 
 ## Sunset to Sunset Overview
 
-Sunset to Sunset allows you to redirect your Craft site visitors to a specified template during the Sabbath hours. It will show a banner a set amount of time before notifiying your users of the upcoming closing hours. It also adds a time guard to the edges of the Sabbath allowing the site to close a set amount of time before and open a set amount of time after the Sabbath hours.
+Sunset to Sunset allows you to show your site visitors a message during the Sabbath hours. It will show a banner a set amount of time before notifiying your users of the upcoming closing hours. It also adds a time guard to the edges of the Sabbath allowing the site to close a set amount of time before and open a set amount of time after the Sabbath hours. You can also cofigure this to show only on specific urls.
 
 ## Configuring Sunset to Sunset
 
@@ -39,5 +37,7 @@ Sunset to Sunset allows you to redirect your Craft site visitors to a specified 
 Some things to do, and ideas for potential features:
 
 * Add indicator in settings showing if simulation mode is enabled.
+* Add widget showing upcoming sunset hours and when the banner will be visible.
+* Show preview of banner in control panel settings.
 
 Brought to you by [Cavell L. Blood](https://cavellblood.com)
