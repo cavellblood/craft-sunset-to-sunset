@@ -91,12 +91,6 @@ class SunsetToSunset extends Plugin
 
         $request = Craft::$app->request;
 
-//        SunsetToSunset::$plugin->base->getLatitude();
-//        SunsetToSunset::$plugin->getSettings()->latitude;
-
-        $template = SunsetToSunset::$plugin->getSettings()->templateRedirect;
-        $urlMatchTemplate = ($request->url === $template);
-
         $simulateTime = SunsetToSunset::$plugin->getSettings()->simulateTime;
         $duringWeek = false;
         $beforeSabbath = false;
@@ -123,15 +117,15 @@ class SunsetToSunset extends Plugin
         }
 
         // Convert specific redirect urls to array
-        $specificRedirectUrls = preg_split("/\r\n|\n|\r/", SunsetToSunset::$plugin->getSettings()->specificRedirectUrls);
+        $specificUrls = preg_split("/\r\n|\n|\r/", SunsetToSunset::$plugin->getSettings()->showOnSpecificUrls);
 
         if ($request->isSiteRequest) {
 
             // Before Sabbath
             if ( $beforeSabbath )
             {
-                if (SunsetToSunset::$plugin->getSettings()->showBannerOnSpecificUrls && count($specificRedirectUrls)) {
-                    foreach ($specificRedirectUrls as $url) {
+                if ( count($specificUrls) ) {
+                    foreach ($specificUrls as $url) {
                         if (preg_match('('. $url . ')i', $request->url)) {
                             // Render Template
                             $this->_showBanner();
@@ -146,8 +140,8 @@ class SunsetToSunset extends Plugin
             // During Sabbath and not on Sabbath URL
             if ( $duringSabbath && !$urlMatchTemplate )
             {
-                if (count($specificRedirectUrls)) {
-                    foreach ($specificRedirectUrls as $url) {
+                if (count($specificUrls)) {
+                    foreach ($specificUrls as $url) {
                         if (preg_match('('. $url . ')i', $request->url)) {
                             // Render Template
                             $this->_showFullMessage();
@@ -253,7 +247,7 @@ class SunsetToSunset extends Plugin
                     'sunset-to-sunset' => 'sunset-to-sunset/base/settings',
                     'sunset-to-sunset/message' => 'sunset-to-sunset/base/settings',
                     'sunset-to-sunset/location' => 'sunset-to-sunset/base/settings-location',
-                    'sunset-to-sunset/template' => 'sunset-to-sunset/base/settings-template',
+                    'sunset-to-sunset/appearance' => 'sunset-to-sunset/base/settings-appearance',
                     'sunset-to-sunset/advanced' => 'sunset-to-sunset/base/settings-advanced',
                 ]);
             }
