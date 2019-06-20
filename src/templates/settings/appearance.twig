@@ -1,0 +1,97 @@
+{% extends "sunset-to-sunset/_layouts" %}
+{% import "_includes/forms" as forms %}
+{% from "sunset-to-sunset/_macros" import configWarning %}
+
+{% set selectedTab = 'appearance' %}
+
+{% set fullPageForm = true %}
+
+{% block blockContent %}
+	{{ parent() }}
+
+    <input type="hidden" name="action" value="plugins/save-plugin-settings">
+    <input type="hidden" name="pluginHandle" value="sunset-to-sunset">
+
+    {% namespace 'settings' %}
+
+        {{ forms.selectField({
+            first: true,
+            label:        'Banner CSS Position'|t('sunset-to-sunset'),
+            instructions: 'Set the CSS `position` property for the banner.'|t('sunset-to-sunset'),
+            id:           'bannerCssPosition',
+            name:         'bannerCssPosition',
+            value:        settings.bannerCssPosition,
+            options: {
+                    'relative' : 'Relative',
+                    'fixed' : 'Fixed',
+            },
+            class:        configWarning('bannerCssPosition', 'sunset-to-sunset') ? 'disabled',
+            disabled:     configWarning('bannerCssPosition', 'sunset-to-sunset'),
+            warning:      configWarning('bannerCssPosition', 'sunset-to-sunset'),
+            errors:       settings.getErrors('bannerCssPosition')
+        }) }}
+
+        {{ forms.colorField({
+            label:        'Banner CSS Background Color'|t('sunset-to-sunset'),
+            instructions: 'Set the CSS `background-color` property for the banner. Any valid CSS color declaration is accepted.'|t('sunset-to-sunset'),
+            id:           'bannerCssBackgroundColor',
+            name:         'bannerCssBackgroundColor',
+            value:        settings.bannerCssBackgroundColor,
+            placeholder:  '#da5a47 or rgb(218, 90, 71)',
+            class:        configWarning('bannerCssBackgroundColor', 'sunset-to-sunset') ? 'disabled' : 'code',
+            disabled:     configWarning('bannerCssBackgroundColor', 'sunset-to-sunset'),
+            warning:      configWarning('bannerCssBackgroundColor', 'sunset-to-sunset'),
+            errors:       settings.getErrors('bannerCssBackgroundColor')
+        }) }}
+
+        <hr>
+
+        {{ forms.textareaField({
+            label: 'Show on Specific URLs'|t('sunset-to-sunset'),
+            class: 'code',
+            instructions: 'The plugin will only show the banner/message if the requested url <span class="error">**starts with**</span> one of the urls below.
+
+### Examples:
+
+<table class="data fullwidth collapsible">
+    <thead>
+    <tr>
+        <th>Specific URL</th>
+        <th>Matches URL starting with</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/store</code></td>
+            <td><code>' ~ siteUrl ~ 'store</code></td>
+        </tr>
+        <tr>
+            <td><code>/</code></td>
+            <td><code>' ~ siteUrl ~ '</code></td>
+        </tr>
+        <tr>
+            <td><code>/news</code></td>
+            <td><code>' ~ siteUrl ~ 'news</code></td>
+        </tr>
+        <tr>
+            <td><code>/news/' ~ now | date('Y') ~ '</code></td>
+            <td><code>' ~ siteUrl ~ 'news/' ~ now | date('Y') ~ '</code></td>
+        </tr>
+    </tbody>
+</table>
+
+**Enter each URL on a new line.** Leave empty to show every page.',
+            id: 'showOnSpecificUrls',
+            name: 'showOnSpecificUrls',
+            type: 'text',
+            placeholder: 'Leave empty to show every page.',
+            rows: 5,
+            value: settings.showOnSpecificUrls
+        }) }}
+
+    {% endnamespace %}
+
+{#<h2>Troubleshooting</h2>#}
+{#<p><a class="btn" href="{{ url('utils/logs/sunsettosunset.log') }}">View logs</a></p>#}
+
+{% endblock %}

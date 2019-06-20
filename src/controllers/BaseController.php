@@ -88,11 +88,11 @@ class BaseController extends Controller
         ]);
     }
 
-    public function actionSettingsTemplate()
+    public function actionSettingsAppearance()
     {
         $settings = SunsetToSunset::$plugin->getSettings();
 
-        return $this->renderTemplate('sunset-to-sunset/settings/template', [
+        return $this->renderTemplate('sunset-to-sunset/settings/appearance', [
             'settings' => $settings,
         ]);
     }
