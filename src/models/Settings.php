@@ -60,14 +60,6 @@ class Settings extends Model
     {
         parent::init();
 
-        if ($this->latitude === null) {
-            $this->latitude = \Craft::t('sunset-to-sunset', '41.8333925');
-        }
-
-        if ($this->longitude === null) {
-            $this->longitude = \Craft::t('sunset-to-sunset', '-88.0121473');
-        }
-
         if ($this->timezone === null) {
             $this->timezone = \Craft::t('sunset-to-sunset', 'America/Chicago');
         }
