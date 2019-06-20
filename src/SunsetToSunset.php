@@ -19,10 +19,12 @@ use craft\base\Plugin;
 use craft\services\Plugins;
 use craft\events\PluginEvent;
 use craft\web\UrlManager;
+use craft\web\View;
 use craft\web\twig\variables\CraftVariable;
 use craft\events\RegisterUrlRulesEvent;
 
 use yii\base\Event;
+use yii\helpers\Html;
 
 /**
  * Craft plugins are very much like little applications in and of themselves. We’ve made
@@ -132,16 +134,12 @@ class SunsetToSunset extends Plugin
                     foreach ($specificRedirectUrls as $url) {
                         if (preg_match('('. $url . ')i', $request->url)) {
                             // Render Template
-                            Craft::$app->view->hook('sunset-to-sunset-banner', function(array &$context) {
-                                return SunsetToSunset::$plugin->base->renderBanner();
-                            });
+                            $this->_showBanner();
                         }
                     }
                 } else {
                     // Render Template
-                    Craft::$app->view->hook('sunset-to-sunset-banner', function(array &$context) {
-                        return SunsetToSunset::$plugin->base->renderBanner();
-                    });
+                    $this->_showBanner();
                 }
             }
 
@@ -152,9 +150,7 @@ class SunsetToSunset extends Plugin
                     foreach ($specificRedirectUrls as $url) {
                         if (preg_match('('. $url . ')i', $request->url)) {
                             // Render Template
-                            Craft::$app->view->hook('sunset-to-sunset-full-message', function(array &$context) {
-                                return SunsetToSunset::$plugin->base->renderFullMessage();
-                            });
+                            $this->_showFullMessage();
                         }
                     }
                 } else {
@@ -273,6 +269,26 @@ class SunsetToSunset extends Plugin
                 /** @var CraftVariable $variable */
                 $variable = $event->sender;
                 $variable->set('sunsetToSunset', SunsetToSunsetVariable::class);
+            }
+        );
+    }
+
+    private function _showBanner() {
+        Event::on(
+            View::class,
+            View::EVENT_BEGIN_BODY,
+            function (Event $event) {
+                echo SunsetToSunset::$plugin->base->renderBanner();
+            }
+        );
+    }
+
+    private function _showFullMessage() {
+        Event::on(
+            View::class,
+            View::EVENT_END_BODY,
+            function (Event $event) {
+                echo SunsetToSunset::$plugin->base->renderFullMessage();
             }
         );
     }
