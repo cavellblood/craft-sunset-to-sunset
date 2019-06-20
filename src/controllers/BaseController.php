@@ -82,6 +82,7 @@ class BaseController extends Controller
     public function actionSettingsLocation()
     {
         $settings = SunsetToSunset::$plugin->getSettings();
+        $settings->validate();
 
         return $this->renderTemplate('sunset-to-sunset/settings/location', [
             'settings' => $settings,
