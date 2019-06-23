@@ -3,13 +3,14 @@
 
     <div class="sts-layout  sts-modal">
         <div class="sts-layout__item  sts-message-area">
+            <h1 class="sts-full-message__heading">Sabbath</h1>
             <p>
                 {{ message }}
             </p>
         </div>
         <div class="sts-layout__item  sts-time-area">
             <p>
-            The store will re-open on
+            We will re-open on
             <strong>
                 <time datetime="{{ openingTime | date('c') }}">{{ openingTime | date('l, F j \\a\\t g:ia T') }}</time>.
             </strong>

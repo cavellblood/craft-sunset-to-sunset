@@ -43,7 +43,7 @@ class SunsetToSunsetVariable
 
     public function getPluginVersion()
     {
-        return '2.0.3';
+        return '2.0.4';
     }
 
     public function getPluginUrl()
