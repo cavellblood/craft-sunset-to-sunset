@@ -138,8 +138,8 @@ class SunsetToSunset extends Plugin
                 }
             }
 
-            // During Sabbath and not on Sabbath URL
-            if ( $duringSabbath && !$urlMatchTemplate )
+            // During Sabbath
+            if ( $duringSabbath )
             {
                 if (count($specificUrls)) {
                     foreach ($specificUrls as $url) {
@@ -149,16 +149,8 @@ class SunsetToSunset extends Plugin
                         }
                     }
                 } else {
-                    $request->redirect($template, true, 302);
-                }
-            }
-
-            // During the week or after Sabbath
-            if ( $duringWeek || $afterSabbath )
-            {
-                // If site is open and on message template redirect
-                if ( $request->isSiteRequest && $urlMatchTemplate ) {
-                    $request->redirect('/', true, 302);
+                    // Render Template
+                    $this->_showFullMessage();
                 }
             }
         }
