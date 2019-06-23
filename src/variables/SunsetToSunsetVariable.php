@@ -48,6 +48,6 @@ class SunsetToSunsetVariable
 
     public function getPluginUrl()
     {
-        return 'https://github.com/cavellblood/sunset-to-sunset';
+        return 'https://github.com/cavellblood/craft-sunset-to-sunset';
     }
 }
