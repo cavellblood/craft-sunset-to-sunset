@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0.4 - 2019-06-23
+### Added
+- The full message template now has a heading
+
+### Changed
+- Change re-opening paragraph in full message template to be more generic
+
 ## 2.0.3 - 2019-06-23
 ### Changed
 - Updated plugin link url in control panel settings template.
