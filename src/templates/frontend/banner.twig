@@ -1,11 +1,11 @@
 {% do view.registerAssetBundle("cavellblood\\sunsettosunset\\assetbundles\\sunsettosunset\\SunsetToSunsetAsset") %}
-<div class="sts__container  {{ bannerCssPosition == 'fixed' ? 'sts__container--fixed' }}"
+<div class="sts-container  {{ bannerCssPosition == 'fixed' ? 'sts-container--fixed' }}"
      style="
      {{ bannerCssPosition ? 'position: ' ~ bannerCssPosition ~ ';' }}
 		{{ bannerCssBackgroundColor ? 'background-color: ' ~ bannerCssBackgroundColor ~ ';' }}
              "
 >
-    <div class="sts__message">
+    <div class="sts-message">
         <p>
             {{ bannerMessage }}
             The store will be closed from

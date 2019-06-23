@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0.1 - 2019-06-23
+### Changed
+- Fixed banner class names to match what was in the stylesheet.
+
 ## 2.0.0 - 2019-06-20
 ### Added
 - Initial release
