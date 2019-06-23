@@ -6,10 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## 2.0.4 - 2019-06-23
 ### Added
-- The full message template now has a heading
+- The full message template now has a heading.
 
 ### Changed
-- Change re-opening paragraph in full message template to be more generic
+- Changed re-opening paragraph in full message template to be more generic.
 
 ## 2.0.3 - 2019-06-23
 ### Changed
