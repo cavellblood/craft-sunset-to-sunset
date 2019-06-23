@@ -26,6 +26,12 @@ html.sts-during-sabbath {
     pointer-events: auto;
 }
 
+.sts-full-message__heading {
+    margin-bottom: 1rem;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
 .sts-layout {
     display: -webkit-box;
     display: -ms-flexbox;
