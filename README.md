@@ -36,6 +36,7 @@ Sunset to Sunset allows you to show your site visitors a message during the Sabb
 
 Some things to do, and ideas for potential features:
 
+* Finish writing out this README file.
 * Add indicator in settings showing if simulation mode is enabled.
 * Add widget showing upcoming sunset hours and when the banner will be visible.
 * Show preview of banner in control panel settings.
