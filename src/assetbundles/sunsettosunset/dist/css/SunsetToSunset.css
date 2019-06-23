@@ -32,7 +32,7 @@ div.half-width-field-left {
 
 .sts-container--fixed {
     width: 100%;
-    z-index: 100;
+    z-index: 9999;
     top: 0;
 }
 
