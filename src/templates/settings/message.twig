@@ -33,6 +33,17 @@
             value:        settings.message
         }) }}
 
+        {{ forms.autosuggestField({
+            label:        'Full Message Template'|t('sunset-to-sunset'),
+            instructions: 'Which template should be loaded when the full message is shown. Leave blank to show defualt plugin template.'|t('sunset-to-sunset'),
+            id:           'messageTemplate',
+            name:         'messageTemplate',
+            suggestions:  craft.cp.getTemplateSuggestions(),
+            class:        'code',
+            value:        settings.messageTemplate,
+            warning:      configWarning('messageTemplate', 'sunset-to-sunset'),
+        }) }}
+
         {{ forms.textField({
             label:        'Show Banner Message Time'|t('sunset-to-sunset'),
             instructions: 'Enter the **number of minutes** before sunset that the banner message should appear.'|t('sunset-to-sunset'),
