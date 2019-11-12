@@ -35,7 +35,13 @@
 
         {{ forms.autosuggestField({
             label:        'Full Message Template'|t('sunset-to-sunset'),
-            instructions: 'Which template should be loaded when the full message is shown. Leave blank to show defualt plugin template.'|t('sunset-to-sunset'),
+            instructions: "Which template should be loaded when the full message is shown. Leave blank to show default plugin template.
+
+#### Variables available in template:
+
+- `{{ message }}`
+- `{{ openingTime }}` &mdash; returns a UNIX timestamp that can then be run throught the `date` filter, i.e. `{{ openingTime | date('l, F j \\a\\t g:ia T') }}`
+- `{{ closingTime }}` &mdash; returns a UNIX timestamp that can then be run throught the `date` filter, i.e. `{{ closingTime | date('l, F j \\a\\t g:ia T') }}`",
             id:           'messageTemplate',
             name:         'messageTemplate',
             suggestions:  craft.cp.getTemplateSuggestions(),
