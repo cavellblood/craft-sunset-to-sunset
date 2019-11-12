@@ -11,6 +11,7 @@
 namespace cavellblood\sunsettosunset\services;
 
 use cavellblood\sunsettosunset\SunsetToSunset;
+use cavellblood\sunsettosunset\assetbundles\duringsabbath\DuringSabbathAsset;
 
 use Craft;
 use craft\base\Component;
@@ -128,9 +129,6 @@ class Base extends Component
     public function renderBanner()
     {
 
-        $oldMode = Craft::$app->getView()->getTemplateMode();
-        Craft::$app->getView()->setTemplateMode(View::TEMPLATE_MODE_CP);
-
         $vars = array(
             'bannerCssPosition' => SunsetToSunset::$plugin->getSettings()->bannerCssPosition,
             'bannerCssBackgroundColor' => SunsetToSunset::$plugin->getSettings()->bannerCssBackgroundColor,
@@ -138,10 +136,13 @@ class Base extends Component
             'openingTime' => SunsetToSunset::$plugin->base->getOpeningTime(),
             'closingTime' => SunsetToSunset::$plugin->base->getClosingTime()
         );
+        
+        $originalTemplateMode = Craft::$app->getView()->getTemplateMode();
+        Craft::$app->getView()->setTemplateMode(View::TEMPLATE_MODE_CP);
 
         $html = Craft::$app->getView()->renderTemplate('sunset-to-sunset/frontend/banner', $vars);
 
-        Craft::$app->getView()->setTemplateMode($oldMode);
+        Craft::$app->getView()->setTemplateMode($originalTemplateMode);
 
         return $html;
     }
@@ -152,19 +153,25 @@ class Base extends Component
      */
     public function renderFullMessage()
     {
-
-        $oldMode = Craft::$app->getView()->getTemplateMode();
-        Craft::$app->getView()->setTemplateMode(View::TEMPLATE_MODE_CP);
-
         $vars = array(
             'message' => SunsetToSunset::$plugin->getSettings()->message,
             'openingTime' => SunsetToSunset::$plugin->base->getOpeningTime(),
             'closingTime' => SunsetToSunset::$plugin->base->getClosingTime()
         );
 
-        $html = Craft::$app->getView()->renderTemplate('sunset-to-sunset/frontend/fullmessage', $vars);
-
-        Craft::$app->getView()->setTemplateMode($oldMode);
+        if (SunsetToSunset::$plugin->getSettings()->messageTemplate !== '') {
+            SunsetToSunset::$plugin->view->registerAssetBundle(DuringSabbathAsset::class);
+            $html = '<div class="sts-full-message__container">';
+            $html .= Craft::$app->getView()->renderTemplate(SunsetToSunset::$plugin->getSettings()->messageTemplate, $vars);
+            $html .= '</div>';
+        } else {
+            $originalTemplateMode = Craft::$app->getView()->getTemplateMode();
+            Craft::$app->getView()->setTemplateMode(View::TEMPLATE_MODE_CP);
+    
+            $html = Craft::$app->getView()->renderTemplate('sunset-to-sunset/frontend/fullmessage', $vars);
+    
+            Craft::$app->getView()->setTemplateMode($originalTemplateMode);
+        }
 
         return $html;
     }

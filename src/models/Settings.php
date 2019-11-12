@@ -45,6 +45,7 @@ class Settings extends Model
     public $timezone;
     public $guard;
     public $message;
+    public $messageTemplate;
     public $bannerMessage;
     public $showMessageTime;
     public $showOnSpecificUrls;
@@ -99,6 +100,7 @@ class Settings extends Model
                     'longitude',
                     'timezone',
                     'message',
+                    'messageTemplate',
                     'showOnSpecificUrls',
                     'bannerMessage',
                     'bannerCssPosition',
