@@ -11,6 +11,7 @@
 namespace cavellblood\sunsettosunset\services;
 
 use cavellblood\sunsettosunset\SunsetToSunset;
+use cavellblood\sunsettosunset\assetbundles\duringsabbath\DuringSabbathAsset;
 
 use Craft;
 use craft\base\Component;
@@ -159,7 +160,10 @@ class Base extends Component
         );
 
         if (SunsetToSunset::$plugin->getSettings()->messageTemplate !== '') {
-            $html = Craft::$app->getView()->renderTemplate(SunsetToSunset::$plugin->getSettings()->messageTemplate, $vars);
+            SunsetToSunset::$plugin->view->registerAssetBundle(DuringSabbathAsset::class);
+            $html = '<div class="sts-full-message__container">';
+            $html .= Craft::$app->getView()->renderTemplate(SunsetToSunset::$plugin->getSettings()->messageTemplate, $vars);
+            $html .= '</div>';
         } else {
             $originalTemplateMode = Craft::$app->getView()->getTemplateMode();
             Craft::$app->getView()->setTemplateMode(View::TEMPLATE_MODE_CP);
