@@ -129,9 +129,6 @@ class Base extends Component
     public function renderBanner()
     {
 
-        $originalTemplateMode = Craft::$app->getView()->getTemplateMode();
-        Craft::$app->getView()->setTemplateMode(View::TEMPLATE_MODE_CP);
-
         $vars = array(
             'bannerCssPosition' => SunsetToSunset::$plugin->getSettings()->bannerCssPosition,
             'bannerCssBackgroundColor' => SunsetToSunset::$plugin->getSettings()->bannerCssBackgroundColor,
@@ -139,6 +136,9 @@ class Base extends Component
             'openingTime' => SunsetToSunset::$plugin->base->getOpeningTime(),
             'closingTime' => SunsetToSunset::$plugin->base->getClosingTime()
         );
+        
+        $originalTemplateMode = Craft::$app->getView()->getTemplateMode();
+        Craft::$app->getView()->setTemplateMode(View::TEMPLATE_MODE_CP);
 
         $html = Craft::$app->getView()->renderTemplate('sunset-to-sunset/frontend/banner', $vars);
 
