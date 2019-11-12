@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.1.0 - 2019-11-12
+### Added
+- Users can now choose a template of their own to load during the Sabbath hours.
+
 ## 2.0.4 - 2019-06-23
 ### Added
 - The full message template now has a heading.
