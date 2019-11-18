@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.1.1 - 2019-11-18
+### Changed
+- The full message container now has `overflow-y` set to `scroll` allowing custom templates to scroll content if content is greater than the vertical screen height.
+
+### Fixed
+- The full message template no longer loads control panel CSS which could break styles on the front-end.
+
 ## 2.1.0 - 2019-11-12
 ### Added
 - Users can now choose a template of their own to load during the Sabbath hours.
