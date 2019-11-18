@@ -10,5 +10,5 @@
  * @since     2.0.2
  */
 
-var body = document.getElementsByTagName("html")[0];
-body.classList.add("sts-during-sabbath");
+var html = document.getElementsByTagName("html")[0];
+html.classList.add("sts-during-sabbath");
