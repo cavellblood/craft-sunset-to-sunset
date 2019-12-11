@@ -12,7 +12,6 @@
 
 html.sts-during-sabbath {
     overflow: hidden;
-    pointer-events: none;
 }
 
 .sts-full-message__container {
@@ -22,7 +21,7 @@ html.sts-during-sabbath {
     left: 0;
     position: absolute;
     background-color: white;
-    z-index: 9999;
+    z-index: 500;
     pointer-events: auto;
     overflow-y: scroll;
 }
