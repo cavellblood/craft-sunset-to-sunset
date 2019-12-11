@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.1.2 - 2019-12-11
+### Fixed
+- Updated styles to work better with [Humaan Modaal](https://github.com/humaan/Modaal). This may also help it work better with other modal packages but hasn&rsquo;t been tested.
+
 ## 2.1.1 - 2019-11-18
 ### Changed
 - The full message container now has `overflow-y` set to `scroll` allowing custom templates to scroll content if content is greater than the vertical screen height.
