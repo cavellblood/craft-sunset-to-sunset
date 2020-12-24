@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.1.3 - 2020-12-23
+### Fixed
+- Fixed Composer 2 compatibility issue.
+
 ## 2.1.2 - 2019-12-11
 ### Fixed
 - Updated styles to work better with [Humaan Modaal](https://github.com/humaan/Modaal). This may also help it work better with other modal packages but hasn&rsquo;t been tested.
