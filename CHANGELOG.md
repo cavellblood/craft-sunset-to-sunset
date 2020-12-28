@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## Unreleased
 ### Fixed
 - Fixed styling issues on the plugin control panel user interface.
+- Fixed an issue where `select` inputs were being disabled in the control panel.
+
 ## 2.1.3 - 2020-12-23
 ### Fixed
 - Fixed Composer 2 compatibility issue.
