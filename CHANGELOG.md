@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.1.4 - 2020-12-28
+### Fixed
+- Fixed styling issues on the plugin control panel user interface.
+- Fixed an issue where `select` inputs were being disabled in the control panel.
+
 ## 2.1.3 - 2020-12-23
 ### Fixed
 - Fixed Composer 2 compatibility issue.
